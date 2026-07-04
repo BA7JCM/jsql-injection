@@ -242,8 +242,8 @@ strategy:
    orderByErrorMessage:
     # loose postgres error message, regex negative lookbehind prevents collision with vertica
     - "(?<!Vertica.*)ERROR: ORDER BY position 1337 is not in select list"
-   # pg_advisory_lock to prevent collision with cockroachdb
-   engineSpecific: "pg_advisory_lock(0)||'a'::text = case when version() not ilike '%25greenplum%25' and ${test} then split_part('a','',1) else 'b' end"
+   # pg_advisory_unlock to prevent collision with cockroachdb (pg_advisory_lock not working)
+   engineSpecific: "'a'::text = case when not pg_advisory_unlock(0) and version() not ilike '%25greenplum%25' and ${test} then split_part('a','',1) else 'b' end"
 
  union:
   indices: union select ${indices}
