@@ -243,7 +243,7 @@ strategy:
    orderByErrorMessage:
     # loose postgres error message, regex negative lookbehind prevents collision with vertica
     - "(?<!Vertica.*)ERROR: ORDER BY position 1337 is not in select list"
-   engineSpecific: case when ${test} then split_part('a','',1)else'b'end='a'::text
+   engineSpecific: "'a'::text = case when ${test} and version() not ilike '%greenplum%' then split_part('a','',1) else 'b' end"
 
  union:
   indices: union select ${indices}

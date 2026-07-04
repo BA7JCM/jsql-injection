@@ -1,0 +1,9 @@
+engine: Greenplum
+clone: postgres.yml
+
+strategy:
+  configuration:
+    fingerprint:
+      errorMessage:
+        - "(?<!postgres.*)ERROR: unterminated quoted identifier at or near"
+      engineSpecific: "'a' = case when (select sum(0)) != 1 and ${test} then 'a' else '' end"

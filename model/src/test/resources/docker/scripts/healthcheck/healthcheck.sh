@@ -14,9 +14,22 @@ function main {
       waiter Mysql  # last as slow
     ;;
 
+    Greenplum)
+      waiter "$1"
+      sleep 60  # setup, should not be hardcoded
+      # should be in Dockerfile or docker-compose when db is up
+      cat <<EOF | docker exec -i --user gpadmin jsql-greenplum /bin/bash
+        source /opt/greenplum-db-6.8.1/greenplum_path.sh
+        export MASTER_DATA_DIRECTORY=/data/master/gpsne-1/
+        sed -i 's/5432/5434/' /data/master/gpsne-1/postgresql.conf
+        /opt/greenplum-db-6.8.1/bin/gpstop -a
+        /opt/greenplum-db-6.8.1/bin/gpstart -a
+EOF
+      waiter Greenplum5434
+    ;;
+
     Db2)
       waiter "$1"
-
       # should be in Dockerfile or docker-compose when db is up
       cat <<EOF | docker exec -i --workdir /database/config/db2inst1/sqllib/bin --user db2inst1 jsql-db2 /bin/bash
         . /database/config/db2inst1/sqllib/db2profile
@@ -30,7 +43,7 @@ EOF
 
     Hana)
       echo Setup, sleeping 120s...
-      sleep 120  # hana setup
+      sleep 120  # setup, should not be hardcoded
       waiter "$1"
       echo Starting post start phase, creating tenant database, sleeping 300s...
       sleep 300  # end of startup after getting result
@@ -130,6 +143,23 @@ function Firebird {  # shellcheck disable=SC2317
 EOF
 }  # correct status 1 on error
 
+function Greenplum {  # shellcheck disable=SC2317
+  cat <<EOF | docker exec -i --user gpadmin jsql-greenplum /bin/bash
+    source /opt/greenplum-db-6.8.1/greenplum_path.sh
+    export MASTER_DATA_DIRECTORY=/data/master/gpsne-1/
+    /opt/greenplum-db-6.8.1/bin/psql -p 5432 -U gpadmin -d postgres -c "select 'jsqlValue' as jsqlColumn"
+EOF
+}  # correct status 1 on error
+
+function Greenplum5434 {  # shellcheck disable=SC2317
+  cat <<EOF | docker exec -i --user gpadmin jsql-greenplum /bin/bash
+    source /opt/greenplum-db-6.8.1/greenplum_path.sh
+    export MASTER_DATA_DIRECTORY=/data/master/gpsne-1/
+    # force tcp connection matching pg_hba.conf
+    /opt/greenplum-db-6.8.1/bin/psql -h 127.0.0.1 -p 5434 -U tester -d testdb -c "select 'jsqlValue' as jsqlColumn"
+EOF
+}  # correct status 1 on error
+
 # shellcheck disable=SC2317
 function Hana {
   result=$(  # todo should use hdbsql cli instead (not working)
@@ -215,7 +245,7 @@ function Presto {  # shellcheck disable=SC2317
 }  # correct status 1 on error
 
 function Spanner {  # prebuild image, no tools available
-  sleep 5
+  sleep 5  # should not be hardcoded
 }
 
 function Sqlserver {  # shellcheck disable=SC2317

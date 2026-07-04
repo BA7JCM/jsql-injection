@@ -33,8 +33,8 @@ jobs:
       matrix:
         # must match java classes
         engine: [
-          Altibase, Clickhouse, Cockroachdb, Dameng, Db2, Duckdb, Exasol, Hana, Mariadb, Mimer,
-          Monetdb, Oracle, Presto, Spanner, Sqlserver, Sybase, Vertica, Virtuoso
+          Altibase, Clickhouse, Cockroachdb, Dameng, Db2, Duckdb, Exasol, Greenplum, Hana, Mariadb,
+          Mimer, Monetdb, Oracle, Presto, Spanner, Sqlserver, Sybase, Vertica, Virtuoso
         ]
     with:
       DOCKER_RESOURCES: ${{ needs.set-global-env-var.outputs.DOCKER_RESOURCES }}
