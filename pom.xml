@@ -38,7 +38,7 @@
         <flatten-maven-plugin.version>1.7.3</flatten-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.15</jacoco-maven-plugin.version>
         <junit-bom.version>6.1.1</junit-bom.version>
-        <log4j-bom.version>2.26.0</log4j-bom.version>
+        <log4j-bom.version>2.26.1</log4j-bom.version>
         <maven-antrun-plugin.version>3.2.0</maven-antrun-plugin.version>
         <maven-assembly-plugin.version>3.8.0</maven-assembly-plugin.version>
         <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>

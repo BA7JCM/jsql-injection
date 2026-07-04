@@ -33,7 +33,7 @@
         <!-- must align slf4j-nop when bumped -->
         <dnsjava.version>3.6.5</dnsjava.version>
         <gmavenplus-plugin.version>5.0.0</gmavenplus-plugin.version>
-        <groovy.version>5.0.6</groovy.version>
+        <groovy.version>5.0.7</groovy.version>
         <groovy-test-junit5.version>4.0.13</groovy-test-junit5.version>
         <jcabi-log.version>0.24.3</jcabi-log.version>
         <jquery.version>3.7.1</jquery.version>
@@ -60,7 +60,7 @@
         <!-- 'libduckdb_java.so: The specified procedure could not be found' on local 1.5.4.0 -->
         <!-- 'Could not initialize class DuckDNative' -->
         <duckdb.version>1.5.3.0</duckdb.version>
-        <exasol.version>26.2.7</exasol.version>
+        <exasol.version>26.2.8</exasol.version>
         <firebird.version>6.0.5</firebird.version>
         <h2.version>2.4.240</h2.version>
         <hana.version>2.29.7</hana.version>
@@ -78,7 +78,7 @@
         <!-- both java-driver and jdbc-driver required, should use neo4j-jdbc instead -->
         <neo4j-jdbc-driver.version>4.0.10</neo4j-jdbc-driver.version>
         <oracle.version>23.26.2.0.0</oracle.version>
-        <postgres.version>42.7.11</postgres.version>
+        <postgres.version>42.7.12</postgres.version>
         <presto.version>0.298.1</presto.version>
         <sqlite.version>3.53.2.0</sqlite.version>
         <spanner.version>2.40.0</spanner.version>

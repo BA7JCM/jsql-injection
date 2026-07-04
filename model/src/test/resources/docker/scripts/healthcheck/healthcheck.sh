@@ -21,8 +21,8 @@ function main {
       cat <<EOF | docker exec -i --user gpadmin jsql-greenplum /bin/bash
         source /opt/greenplum-db-6.8.1/greenplum_path.sh
         export MASTER_DATA_DIRECTORY=/data/master/gpsne-1/
-        sed -i 's/5432/5434/' /data/master/gpsne-1/postgresql.conf
         /opt/greenplum-db-6.8.1/bin/gpstop -a
+        sed -i 's/5432/5434/' /data/master/gpsne-1/postgresql.conf
         /opt/greenplum-db-6.8.1/bin/gpstart -a
 EOF
       waiter Greenplum5434
@@ -156,7 +156,7 @@ function Greenplum5434 {  # shellcheck disable=SC2317
     source /opt/greenplum-db-6.8.1/greenplum_path.sh
     export MASTER_DATA_DIRECTORY=/data/master/gpsne-1/
     # force tcp connection matching pg_hba.conf
-    /opt/greenplum-db-6.8.1/bin/psql -h 127.0.0.1 -p 5434 -U tester -d testdb -c "select 'jsqlValue' as jsqlColumn"
+    /opt/greenplum-db-6.8.1/bin/psql -h jsql-greenplum -p 5434 -U tester -d testdb -c "select 'jsqlValue' as jsqlColumn"
 EOF
 }  # correct status 1 on error
 
