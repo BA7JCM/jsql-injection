@@ -363,6 +363,7 @@ public class JdbcRestController {
 
     private Greeting getGreeting(String url, String user, String password, String sql) {
         Greeting greeting;
+        sql = sql.replace(":", "\\:");  // prevent log error: Malformed escape pair at index
         try (
             Connection connection = DriverManager.getConnection(url, user, password);
             PreparedStatement preparedStatement = connection.prepareStatement(sql);

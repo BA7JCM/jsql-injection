@@ -234,7 +234,6 @@ strategy:
     - function\\.pg
     - cratedb
     - enterprisedb
-    - greenplum
     - opengauss
     - postgres
     - redshift

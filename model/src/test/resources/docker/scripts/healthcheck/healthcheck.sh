@@ -16,7 +16,7 @@ function main {
 
     Greenplum)
       waiter "$1"
-      sleep 60  # setup, should not be hardcoded
+      sleep 80  # setup, should not be hardcoded
       # should be in Dockerfile or docker-compose when db is up
       cat <<EOF | docker exec -i --user gpadmin jsql-greenplum /bin/bash
         source /opt/greenplum-db-6.8.1/greenplum_path.sh
