@@ -236,6 +236,10 @@ function Oracle {  # shellcheck disable=SC2317
 EOF
 }  # no status 1 on error
 
+function Percona {  # shellcheck disable=SC2317
+  docker exec -i jsql-percona mysql -uroot -pmy-secret-pw -e "select 'jsqlValue' as jsqlColumn"
+}  # correct status 1 on error
+
 function Postgres {  # shellcheck disable=SC2317
   docker exec -i jsql-postgres psql -h "localhost" -p 5432 -U postgres -c "select 'jsqlValue' as jsqlColumn"
 }  # correct status 1 on error
@@ -258,6 +262,13 @@ function Sybase {  # shellcheck disable=SC2317
   go
 EOF
 }  # no status 1 on error
+
+function Tidb {  # shellcheck disable=SC2317
+  cat <<EOF | docker exec -i jsql-tidb /bin/bash
+  yum -y install mysql
+  mysql -h 127.0.0.1 -P 4000 -u root -e "select 'jsqlValue' as jsqlColumn"
+EOF
+}  # correct status 1 on error
 
 function Vertica {  # shellcheck disable=SC2317
   cat <<EOF | docker exec -i jsql-vertica /opt/vertica/bin/vsql -U dbadmin -w password
