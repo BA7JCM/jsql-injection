@@ -63,12 +63,14 @@ public class MediatorEngine {
     private final Engine mysql;
     private final Engine neo4j;
     private final Engine oracle;
+    private final Engine percona;
     private final Engine postgres;
     private final Engine presto;
     private final Engine spanner;
     private final Engine sqlite;
     private final Engine sqlserver;
     private final Engine sybase;
+    private final Engine tidb;
     private final Engine vertica;
     private final Engine virtuoso;
 
@@ -113,6 +115,7 @@ public class MediatorEngine {
         this.mysql = new Engine(new EngineYaml("mysql.yml", injectionModel));
         this.neo4j = new Engine(new EngineYaml("neo4j.yml", injectionModel));
         this.oracle = new Engine(new EngineYaml("oracle.yml", injectionModel));
+        this.percona = new Engine(new EngineYaml("percona.yml", injectionModel));
         this.postgres = new Engine(new EngineYaml("postgres.yml", injectionModel));
         this.presto = new Engine(new EngineYaml("presto.yml", injectionModel));
         this.spanner = new Engine(new EngineYaml("spanner.yml", injectionModel));
@@ -148,20 +151,21 @@ public class MediatorEngine {
         };
         this.sqlserver = new Engine(new EngineYaml("sqlserver.yml", injectionModel));
         this.sybase = new Engine(new EngineYaml("sybase.yml", injectionModel));
+        this.tidb = new Engine(new EngineYaml("tidb.yml", injectionModel));
         this.vertica = new Engine(new EngineYaml("vertica.yml", injectionModel));
         this.virtuoso = new Engine(new EngineYaml("virtuoso.yml", injectionModel));
 
         this.engines = Arrays.asList(
             this.auto, this.access, this.altibase, ctreeace, this.clickhouse, this.cockroachdb, this.cubrid, this.dameng, this.db2, this.derby, this.duckdb,
             this.exasol, this.firebird, frontbase, this.greenplum, this.h2, this.hana, this.hsqldb, this.informix, ingres, iris, maxdb, this.mariadb, this.mckoi,
-            this.mimer, this.monetdb, this.mysql, this.neo4j, netezza, nuodb, this.oracle, this.postgres, this.presto, this.spanner, this.sqlite, this.sqlserver,
-            this.sybase, teradata, this.vertica, this.virtuoso
+            this.mimer, this.monetdb, this.mysql, this.neo4j, netezza, nuodb, this.oracle, this.percona, this.postgres, this.presto, this.spanner, this.sqlite,
+            this.sqlserver, this.sybase, this.tidb, teradata, this.vertica, this.virtuoso
         );
         this.enginesForFingerprint = Arrays.asList(  // Add sortIndex
             this.mysql, this.postgres, this.sqlite, this.h2, this.hsqldb, this.oracle, this.sqlserver, this.mariadb, this.spanner, this.duckdb,
             this.altibase, ctreeace, this.cubrid, this.db2, this.derby, this.exasol, this.firebird, frontbase, this.hana, this.informix, ingres,
             iris, maxdb, this.mckoi, this.mimer, this.monetdb, this.neo4j, netezza, nuodb, this.presto, this.sybase, teradata, this.vertica,
-            this.virtuoso, this.clickhouse, this.access, this.dameng, this.cockroachdb, this.greenplum
+            this.virtuoso, this.clickhouse, this.access, this.dameng, this.cockroachdb, this.greenplum, this.percona, this.tidb
         );
 
         this.engine = this.mysql;
@@ -356,6 +360,10 @@ public class MediatorEngine {
         return this.oracle;
     }
 
+    public Engine getPercona() {
+        return this.percona;
+    }
+
     public Engine getPostgres() {
         return this.postgres;
     }
@@ -378,6 +386,10 @@ public class MediatorEngine {
 
     public Engine getSybase() {
         return this.sybase;
+    }
+
+    public Engine getTidb() {
+        return this.tidb;
     }
 
     public Engine getVertica() {

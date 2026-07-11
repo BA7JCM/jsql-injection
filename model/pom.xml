@@ -32,7 +32,7 @@
         <commons-lang3.version>3.20.0</commons-lang3.version>
         <!-- must align slf4j-nop when bumped -->
         <dnsjava.version>3.6.5</dnsjava.version>
-        <gmavenplus-plugin.version>5.0.0</gmavenplus-plugin.version>
+        <gmavenplus-plugin.version>5.1.0</gmavenplus-plugin.version>
         <groovy.version>5.0.7</groovy.version>
         <groovy-test-junit5.version>4.0.13</groovy-test-junit5.version>
         <jcabi-log.version>0.24.3</jcabi-log.version>
@@ -90,19 +90,11 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <!-- Spring versions -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot-dependencies.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-            <dependency>
-                <!-- dependency in junit-pioneer deprecated by transitive junit-bom => force version -->
-                <!-- to remove when junit-pioneer aligns junit-bom -->
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-params</artifactId>
-                <version>${junit-bom.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

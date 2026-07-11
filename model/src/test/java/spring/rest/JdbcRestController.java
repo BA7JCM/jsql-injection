@@ -178,6 +178,16 @@ public class JdbcRestController {
         return greeting;
     }
 
+    @RequestMapping("/percona")
+    public Greeting greetingPercona(@RequestParam(value="name") String name) {
+        return this.getGreeting(
+            SpringApp.get("percona").getProperty(JdbcSettings.JAKARTA_JDBC_URL),
+            SpringApp.get("percona").getProperty(JdbcSettings.JAKARTA_JDBC_USER),
+            SpringApp.get("percona").getProperty(JdbcSettings.JAKARTA_JDBC_PASSWORD),
+            "select schema_name from information_schema.schemata where '1' = '" + name + "'"
+        );
+    }
+
     @RequestMapping("/presto")
     public Greeting greetingPresto(@RequestParam(value="name") String name) throws ClassNotFoundException {
         Class.forName("com.facebook.presto.jdbc.PrestoDriver");
@@ -197,6 +207,16 @@ public class JdbcRestController {
             null,
             null,
             "select SCHEMA_NAME from INFORMATION_SCHEMA.SCHEMATA where '1' = '"+ name +"'"
+        );
+    }
+
+    @RequestMapping("/tidb")
+    public Greeting greetingTidb(@RequestParam(value="name") String name) {
+        return this.getGreeting(
+            SpringApp.get("tidb").getProperty(JdbcSettings.JAKARTA_JDBC_URL),
+            SpringApp.get("tidb").getProperty(JdbcSettings.JAKARTA_JDBC_USER),
+            SpringApp.get("tidb").getProperty(JdbcSettings.JAKARTA_JDBC_PASSWORD),
+            "select schema_name from information_schema.schemata where '1' = '" + name + "'"
         );
     }
 

@@ -110,10 +110,12 @@
                     **/*Mimer*SuiteIT.java,
                     **/*Monetdb*SuiteIT.java,
                     **/*Oracle*SuiteIT.java,
+                    **/*Percona*SuiteIT.java,
                     **/*Presto*SuiteIT.java,
                     **/*Spanner*SuiteIT.java,
                     **/*Sqlserver*SuiteIT.java,
                     **/*Sybase*SuiteIT.java,
+                    **/*Tidb*SuiteIT.java,
                     **/*Vertica*SuiteIT.java,
                     **/*Virtuoso*SuiteIT.java
                 </maven-failsafe-plugin.exclude>
@@ -153,15 +155,15 @@
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-bom</artifactId>
                 <version>${log4j-bom.version}</version>
-                <scope>import</scope>
                 <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
                 <version>${junit-bom.version}</version>
-                <scope>import</scope>
                 <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>org.awaitility</groupId>
